@@ -1,10 +1,16 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from '../Components/Navbar';
+import Dashboard from '../Pages/Dashboard';
 
 const AppRouter = () => {
   return (
-    <div>
-      <h1>AppRouter</h1>
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 };
 
