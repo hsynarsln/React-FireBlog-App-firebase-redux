@@ -62,14 +62,14 @@ const Navbar = () => {
             >
               {auth ? (
                 <>
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={() => navigate('/profile/userId?=1')}>Profile</MenuItem>
                   <MenuItem onClick={() => navigate('/new-blog')}>New</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
                 </>
               ) : (
                 <>
-                  <MenuItem onClick={handleClose}>Login</MenuItem>
-                  <MenuItem onClick={handleClose}>Register</MenuItem>
+                  <MenuItem onClick={() => navigate('/login')}>Login</MenuItem>
+                  <MenuItem onClick={() => navigate('/register')}>Register</MenuItem>
                 </>
               )}
             </Menu>

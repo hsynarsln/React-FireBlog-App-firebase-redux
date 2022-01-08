@@ -1,13 +1,14 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Avatar, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const BlogCard = ({ card, setCurrentId }) => {
   const user = null;
   // console.log(card);
   const navigate = useNavigate();
+  const [isSignin, setIsSignin] = useState(true);
 
   const Likes = () => {
     if (card.likes.length > 0) {
@@ -47,7 +48,15 @@ const BlogCard = ({ card, setCurrentId }) => {
           subheader={card.date}
         /> */}
         <div className='transform'>
-          <CardMedia style={{ cursor: 'pointer' }} component='img' image={card.imageURL} title={card.title} onClick={() => navigate(`/detail/${card.id}`)} />
+          <CardMedia
+            style={{ cursor: 'pointer' }}
+            component='img'
+            image={card.imageURL}
+            title={card.title}
+            onClick={() => {
+              isSignin ? navigate(`/detail/${card.id}`) : navigate('login');
+            }}
+          />
           <CardContent style={{ backgroundColor: '#e7e6f5', cursor: 'pointer' }} onClick={() => navigate(`/detail/${card.id}`)}>
             <Typography variant='h5' color='text.primary' mb={2} style={{ color: '#046582' }}>
               {card.title.toUpperCase()}
