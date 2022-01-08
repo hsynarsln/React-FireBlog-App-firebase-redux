@@ -47,7 +47,7 @@ const BlogCard = ({ card, setCurrentId }) => {
           subheader={card.date}
         /> */}
         <div className='transform'>
-          <CardMedia style={{ cursor: 'pointer' }} component='img' image={card.image} title={card.title} onClick={() => navigate(`/detail/${card.id}`)} />
+          <CardMedia style={{ cursor: 'pointer' }} component='img' image={card.imageURL} title={card.title} onClick={() => navigate(`/detail/${card.id}`)} />
           <CardContent style={{ backgroundColor: '#e7e6f5', cursor: 'pointer' }} onClick={() => navigate(`/detail/${card.id}`)}>
             <Typography variant='h5' color='text.primary' mb={2} style={{ color: '#046582' }}>
               {card.title.toUpperCase()}
@@ -56,7 +56,7 @@ const BlogCard = ({ card, setCurrentId }) => {
               {card.date}
             </Typography>
             <Typography variant='body2' color='text.primary' className='line-clamp'>
-              {card.description}
+              {card.content}
             </Typography>
           </CardContent>
         </div>

@@ -4,7 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Avatar, Card, CardActions, CardContent, CardMedia, Container, Grid, Grow, IconButton, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { cards } from '../Helpers/data';
 
 const Details = () => {
@@ -13,6 +13,7 @@ const Details = () => {
   // console.log(cards);
   let card = cards.find(c => c.id == id);
   // console.log(card);
+  const navigate = useNavigate();
 
   const Likes = () => {
     if (card.likes.length > 0) {
@@ -62,7 +63,7 @@ const Details = () => {
           subheader={card.date}
         /> */}
                 {/* //! moment --> example; 5 seconds ago, 5 minutes ago gibi */}
-                <CardMedia component='img' image={card.image} title={card.title} />
+                <CardMedia component='img' image={card.imageURL} title={card.title} />
                 <CardContent style={{ backgroundColor: '#e7e6f5' }}>
                   <Typography variant='h4' mb={2} mt={2} align='center' style={{ color: '#046582' }}>
                     {card.title.toUpperCase()}
@@ -71,7 +72,7 @@ const Details = () => {
                     {card.date}
                   </Typography>
                   <Typography variant='body1' color='text.primary'>
-                    {card.description}
+                    {card.content}
                   </Typography>
                 </CardContent>
                 <CardContent>
@@ -88,7 +89,7 @@ const Details = () => {
                   </IconButton>
                   {(user?.result?.googleId === card?.creator || user?.result?._id === card?.creator) && (
                     <div style={{ position: 'absolute', right: '15%' }}>
-                      <IconButton style={{ fontSize: '0.8em' }} size='large' color='info' onClick={() => {}} aria-label='share'>
+                      <IconButton style={{ fontSize: '0.8em' }} size='large' color='info' onClick={() => navigate(`/update-blog/${card.id}`)} aria-label='share'>
                         <EditIcon fontSize='large' />
                         &nbsp; EDIT &nbsp;
                       </IconButton>

@@ -1,11 +1,13 @@
 import { AppBar, Avatar, Box, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
+import { teal } from '@mui/material/colors';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = event => {
     setAnchorElUser(event.currentTarget);
@@ -20,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position='static'>
+    <AppBar position='static' sx={{ bgcolor: teal[400] }}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
@@ -61,7 +63,7 @@ const Navbar = () => {
               {auth ? (
                 <>
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>New</MenuItem>
+                  <MenuItem onClick={() => navigate('/new-blog')}>New</MenuItem>
                   <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </>
               ) : (
