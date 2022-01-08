@@ -9,7 +9,7 @@ import { cards } from '../Helpers/data';
 
 const Details = () => {
   const { id } = useParams();
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   // console.log(cards);
   let card = cards.find(c => c.id == id);
   // console.log(card);

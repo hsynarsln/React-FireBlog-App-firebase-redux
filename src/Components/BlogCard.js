@@ -50,6 +50,7 @@ const BlogCard = ({ card, setCurrentId }) => {
         <div className='transform'>
           <CardMedia
             style={{ cursor: 'pointer' }}
+            height='194'
             component='img'
             image={card.imageURL}
             title={card.title}
