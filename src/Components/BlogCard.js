@@ -1,6 +1,6 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
+import { Avatar, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -46,22 +46,26 @@ const BlogCard = ({ card, setCurrentId }) => {
           title={card.email}
           subheader={card.date}
         /> */}
-        {/* //! moment --> example; 5 seconds ago, 5 minutes ago gibi */}
-        <CardMedia component='img' image={card.image} title={card.title} onClick={() => navigate(`/detail/${card.id}`)} />
-        <CardContent style={{ backgroundColor: '#e7e6f5' }} onClick={() => navigate(`/detail/${card.id}`)}>
-          <Typography variant='h5' color='text.secondary'>
-            {card.title}
-          </Typography>
-          <Typography variant='body1' color='text.secondary'>
-            {card.date}
-          </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            {card.description}
-          </Typography>
-        </CardContent>
+        <div className='transform'>
+          <CardMedia style={{ cursor: 'pointer' }} component='img' image={card.image} title={card.title} onClick={() => navigate(`/detail/${card.id}`)} />
+          <CardContent style={{ backgroundColor: '#e7e6f5', cursor: 'pointer' }} onClick={() => navigate(`/detail/${card.id}`)}>
+            <Typography variant='h5' color='text.primary' mb={2} style={{ color: '#046582' }}>
+              {card.title.toUpperCase()}
+            </Typography>
+            <Typography variant='body1' color='text.secondary'>
+              {card.date}
+            </Typography>
+            <Typography variant='body2' color='text.primary' className='line-clamp'>
+              {card.description}
+            </Typography>
+          </CardContent>
+        </div>
         <CardContent>
           <Typography variant='h6' gutterBottom>
-            {card.email}
+            <IconButton sx={{ p: 0 }}>
+              <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+            </IconButton>
+            &nbsp; {card.email} &nbsp;
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
