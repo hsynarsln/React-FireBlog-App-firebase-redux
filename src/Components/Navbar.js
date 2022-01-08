@@ -1,4 +1,4 @@
-import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
+import { AppBar, Avatar, Box, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -24,11 +24,15 @@ const Navbar = () => {
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
-            <img src='https://d1psgljc389n8q.cloudfront.net/bootcamps/logos/VX6tpIUJa' alt='Bank logo' class='nav__logo' width='30rem' />
+            <NavLink to='/' style={{ textDecoration: 'none' }}>
+              <img src='https://d1psgljc389n8q.cloudfront.net/bootcamps/logos/VX6tpIUJa' alt='Bank logo' class='nav__logo' width='30rem' />
+            </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
             <NavLink to='/' style={{ textDecoration: 'none' }}>
-              <Button sx={{ my: 2, color: 'white', display: 'block' }}>FireBlog App</Button>
+              <Typography variant='h4' sx={{ my: 2, color: 'white', display: 'block' }}>
+                FireBlog App
+              </Typography>
             </NavLink>
           </Box>
 
