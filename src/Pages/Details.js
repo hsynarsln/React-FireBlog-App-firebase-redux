@@ -76,13 +76,13 @@ const Details = () => {
                 <CardContent>
                   <Typography variant='h5' gutterBottom>
                     <IconButton sx={{ p: 0 }}>
-                      <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+                      <Avatar alt={card.email.toUpperCase()} src='/static/images/avatar/2.jpg' />
                     </IconButton>
                     &nbsp; {card.email} &nbsp;
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                  <IconButton style={{ fontSize: '0.8em' }} size='small' color='error' disabled={user} onClick={() => {}} aria-label='add to favorites'>
+                  <IconButton style={{ fontSize: '0.8em' }} size='small' color='error' disabled={!user} onClick={() => {}} aria-label='add to favorites'>
                     <Likes />
                   </IconButton>
                   {user?.uid === card?.uid && (

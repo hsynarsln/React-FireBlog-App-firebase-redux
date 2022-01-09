@@ -49,13 +49,13 @@ const BlogForm = ({ currentId, setCurrentId, card }) => {
     }
   }, [card]);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    if (!card.id) {
-      dispatch(createBlog({ ...blogData, email: user?.email, timestamp: Timestamp.now(), uid: user?.uid }));
+    if (card?.id) {
+      await dispatch(updateBlog({ ...blogData, id: card.id, timestamp: Timestamp.now() }));
     } else {
-      dispatch(updateBlog({ ...blogData, id: card.id, timestamp: Timestamp.now() }));
+      await dispatch(createBlog({ ...blogData, email: user?.email, timestamp: Timestamp.now(), uid: user?.uid }));
     }
     navigate('/');
   };

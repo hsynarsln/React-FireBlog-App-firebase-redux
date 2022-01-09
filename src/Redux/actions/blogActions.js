@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import { db } from '../../Helpers/firebase';
 import { CREATE_BLOG, FETCH_ALL_BLOGS } from './blogActionTypes';
 
@@ -58,5 +58,17 @@ export const updateBlog = payload => {
       content: payload.content,
       date: payload.timestamp
     });
+  };
+};
+
+export const likeBlog = (id, uid) => {
+  return async dispatch => {
+    const updateData = doc(db, 'blogs', id);
+
+    await updateDoc(updateData, {
+      likes: arrayUnion(uid)
+    });
+
+    // console.log(updateData);
   };
 };

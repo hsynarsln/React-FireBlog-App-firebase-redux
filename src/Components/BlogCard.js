@@ -2,27 +2,29 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Avatar, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import usersvg from '../Assets/user.svg';
+import { likeBlog } from '../Redux/actions/blogActions';
 
-const BlogCard = ({ card, setCurrentId }) => {
+const BlogCard = ({ card }) => {
   // console.log(card.id);
   const user = useSelector(state => state.userReducer.user);
+  // console.log(user);
+  const dispatch = useDispatch();
   // console.log(card);
   const navigate = useNavigate();
 
   const Likes = () => {
     if (card.likes.length > 0) {
-      return card.likes.find(like => like === (user?.result?.googleId || user?.result?._id)) ? (
+      return card.likes.find(like => like === user?.uid) ? (
         <>
           <FavoriteIcon fontSize='small' />
-          &nbsp;{card.likes.length > 2 ? `You and ${card.likes.length - 1} others` : `${card.likes.length} like${card.likes.length > 1 ? 's' : ''}`}
+          &nbsp;{card.likes.length}
         </>
       ) : (
         <>
           <FavoriteBorderIcon fontSize='small' />
-          &nbsp;{card.likes.length} {card.likes.length === 1 ? 'Like' : 'Likes'}
+          &nbsp;{card.likes.length}
         </>
       );
     }
@@ -30,7 +32,6 @@ const BlogCard = ({ card, setCurrentId }) => {
     return (
       <>
         <FavoriteBorderIcon fontSize='small' />
-        &nbsp;Like
       </>
     );
   };
@@ -60,7 +61,7 @@ const BlogCard = ({ card, setCurrentId }) => {
               user ? navigate(`/detail/${card.id}`) : navigate('login');
             }}
           />
-          <CardContent style={{ backgroundColor: '#e7e6f5', cursor: 'pointer' }} onClick={() => navigate(`/detail/${card.id}`)}>
+          <CardContent style={{ backgroundColor: '#e7e6f5', cursor: 'pointer', height: '6rem' }} onClick={() => navigate(`/detail/${card.id}`)}>
             <Typography variant='h5' color='text.primary' mb={2} style={{ color: '#046582' }}>
               {card.title.toUpperCase()}
             </Typography>
@@ -73,15 +74,15 @@ const BlogCard = ({ card, setCurrentId }) => {
           </CardContent>
         </div>
         <CardContent>
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='body1' gutterBottom>
             <IconButton sx={{ p: 0 }}>
-              <Avatar alt='Remy Sharp' src={usersvg} />
+              <Avatar alt={card.email.toUpperCase()} src='/static/images/avatar/2.jpg' />
             </IconButton>
             &nbsp; {card.email} &nbsp;
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton style={{ fontSize: '0.8em' }} size='small' color='error' disabled={user} onClick={() => {}} aria-label='add to favorites'>
+          <IconButton style={{ fontSize: '0.8em', cursor: 'pointer' }} size='small' color='error' disabled={!user} onClick={() => dispatch(likeBlog(card.id, user.uid))} aria-label='add to favorites'>
             <Likes />
           </IconButton>
           {/* {(user?.result?.googleId === card?.creator || user?.result?._id === card?.creator) && (

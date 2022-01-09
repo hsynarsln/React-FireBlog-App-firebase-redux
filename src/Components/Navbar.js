@@ -1,5 +1,5 @@
 import { AppBar, Avatar, Box, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
-import { teal } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -28,7 +28,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position='static' sx={{ bgcolor: teal[400] }}>
+    <AppBar position='static' sx={{ bgcolor: grey[800] }}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
@@ -55,15 +55,7 @@ const Navbar = () => {
               )}
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {user ? (
-                    <Avatar alt={user.displayName} src={user.photoURL} /> || (
-                      <Avatar alt={user.displayName} src={user.photoURL}>
-                        {user.displayName.charAt(0)}
-                      </Avatar>
-                    )
-                  ) : (
-                    <Avatar alt='Remy Sharp' src={usersvg} />
-                  )}
+                  {user ? <Avatar alt={user.displayName} src={user.photoURL} /> && <Avatar alt={user.displayName.toUpperCase()} src='/static/images/avatar/2.jpg' /> : <Avatar alt='Remy Sharp' src={usersvg} />}
                 </IconButton>
               </Tooltip>
             </div>
