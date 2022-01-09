@@ -1,14 +1,16 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Avatar, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import usersvg from '../Assets/user.svg';
 
 const BlogCard = ({ card, setCurrentId }) => {
-  const user = null;
+  // console.log(card.id);
+  const user = useSelector(state => state.userReducer.user);
   // console.log(card);
   const navigate = useNavigate();
-  const [isSignin, setIsSignin] = useState(true);
 
   const Likes = () => {
     if (card.likes.length > 0) {
@@ -55,7 +57,7 @@ const BlogCard = ({ card, setCurrentId }) => {
             image={card.imageURL}
             title={card.title}
             onClick={() => {
-              isSignin ? navigate(`/detail/${card.id}`) : navigate('login');
+              user ? navigate(`/detail/${card.id}`) : navigate('login');
             }}
           />
           <CardContent style={{ backgroundColor: '#e7e6f5', cursor: 'pointer' }} onClick={() => navigate(`/detail/${card.id}`)}>
@@ -63,7 +65,7 @@ const BlogCard = ({ card, setCurrentId }) => {
               {card.title.toUpperCase()}
             </Typography>
             <Typography variant='body1' color='text.secondary'>
-              {card.date}
+              {card.date.toDate().toLocaleDateString()}
             </Typography>
             <Typography variant='body2' color='text.primary' className='line-clamp'>
               {card.content}
@@ -73,7 +75,7 @@ const BlogCard = ({ card, setCurrentId }) => {
         <CardContent>
           <Typography variant='h6' gutterBottom>
             <IconButton sx={{ p: 0 }}>
-              <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+              <Avatar alt='Remy Sharp' src={usersvg} />
             </IconButton>
             &nbsp; {card.email} &nbsp;
           </Typography>

@@ -84,16 +84,16 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {user?.displayName ? (
-                <>
+                <div>
                   <MenuItem onClick={() => navigate('/profile/userId?=1')}>Profile</MenuItem>
                   <MenuItem onClick={() => navigate('/new-blog')}>New</MenuItem>
                   <MenuItem onClick={() => dispatch(signOutAPI(navigate))}>Logout</MenuItem>
-                </>
+                </div>
               ) : (
-                <>
+                <div>
                   <MenuItem onClick={() => navigate('/login')}>Login</MenuItem>
                   <MenuItem onClick={() => navigate('/register')}>Register</MenuItem>
-                </>
+                </div>
               )}
             </Menu>
           </Box>

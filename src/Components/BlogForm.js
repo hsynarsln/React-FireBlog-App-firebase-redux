@@ -1,7 +1,11 @@
 import { Button, Paper, TextField } from '@mui/material';
 import { teal } from '@mui/material/colors';
 import { makeStyles } from '@mui/styles';
+import { Timestamp } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { createBlog, updateBlog } from '../Redux/actions/blogActions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,12 +32,16 @@ const useStyles = makeStyles(theme => ({
 
 const BlogForm = ({ currentId, setCurrentId, card }) => {
   const [blogData, setBlogData] = useState({
+    id: '',
     title: '',
     imageURL: '',
     content: ''
   });
 
+  const navigate = useNavigate();
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.userReducer.user);
 
   useEffect(() => {
     if (card) {
@@ -41,24 +49,23 @@ const BlogForm = ({ currentId, setCurrentId, card }) => {
     }
   }, [card]);
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
-    // if (!currentId) {
-    //   dispatch(createPost({ ...blogData, name: user?.result?.name }));
-    //   clear();
-    // } else {
-    //   dispatch(updatePost(currentId, { ...blogData, name: user?.result?.name }));
-    //   clear();
-    // }
+    if (!card.id) {
+      dispatch(createBlog({ ...blogData, email: user?.email, timestamp: Timestamp.now(), uid: user?.uid }));
+    } else {
+      dispatch(updateBlog({ ...blogData, id: card.id, timestamp: Timestamp.now() }));
+    }
+    navigate('/');
   };
 
   return (
     <Paper className={classes.paper}>
       <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
         <TextField name='title' variant='outlined' label='Title *' fullWidth value={blogData.title} onChange={e => setBlogData({ ...blogData, title: e.target.value })} />
-        <TextField name='imageURL' variant='outlined' label='Image URL *' fullWidth value={blogData.imageURL} onChange={e => setBlogData({ ...blogData, message: e.target.value })} />
-        <TextField name='content' variant='outlined' label='Content *' fullWidth value={blogData.content} onChange={e => setBlogData({ ...blogData, tags: e.target.value })} multiline rows={10} />
+        <TextField name='imageURL' variant='outlined' label='Image URL *' fullWidth value={blogData.imageURL} onChange={e => setBlogData({ ...blogData, imageURL: e.target.value })} />
+        <TextField name='content' variant='outlined' label='Content *' fullWidth value={blogData.content} onChange={e => setBlogData({ ...blogData, content: e.target.value })} multiline rows={10} />
         <Button className={classes.buttonSubmit} sx={{ bgcolor: teal[400] }} variant='contained' color='success' size='medium' type='submit' fullWidth>
           {blogData.id ? 'UPDATE' : 'SUBMIT'}
         </Button>
