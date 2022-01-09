@@ -6,11 +6,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Icon from '../Components/Icon';
-import { signIn } from '../Redux/actions/userActions';
+import { signIn, signupWithEmail } from '../Redux/actions/userActions';
 
 //! Yup --> validation olarak kullanılıyor
 //! Bu şemayı Formik içerisine validationShema olarak atıyoruz.
 const signUpValidationSchema = Yup.object().shape({
+  username: Yup.string().required('Display name is required').min(2, 'Too short').max(15, 'Must be 15 char or less'),
   //! En az 2 karakter olması lazım. olmazsa yanına yazdığımız mesajı
   email: Yup.string().email('Invalid Email').required('Email is required'),
   password: Yup.string()
@@ -25,10 +26,9 @@ const signUpValidationSchema = Yup.object().shape({
 function Login() {
   const dispatch = useDispatch();
   const initialValues = {
-    name: '',
+    username: '',
     email: '',
-    password: '',
-    password2: ''
+    password: ''
   };
 
   const [isSignup, setIsSignup] = useState(false);
@@ -37,16 +37,7 @@ function Login() {
 
   const handleSubmit = (values, { resetForm }) => {
     // console.log(values);
-    // alert(
-    //   `email: ${values.email}
-    //   password: ${values.password}`
-    // );
-    // console.log(isSignup);
-    // if (isSignup) {
-    //   dispatch(signup(values, navigate));
-    // } else {
-    //   dispatch(signin(values, navigate));
-    // }
+    dispatch(signupWithEmail(values, navigate));
 
     resetForm();
     // navigate('/');
@@ -60,11 +51,10 @@ function Login() {
     <div className='auth'>
       <Container
         sx={{
-          marginTop: '3rem',
           // mt: 6,
-          height: 'calc(80vh - 3rem)',
+          height: 'calc(80vh)',
           textAlign: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.6)',
+          backgroundColor: 'rgba(255, 255, 255, 0.4)',
           padding: '3rem',
           borderRadius: '20px'
         }}
@@ -104,6 +94,23 @@ function Login() {
           }) => (
             <form onSubmit={handleSubmit}>
               <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  {/* //! xs={12} --> 12 birim yer kaplasın */}
+                  <TextField
+                    name='username'
+                    label='User Name'
+                    variant='outlined'
+                    value={values.username}
+                    onChange={handleChange}
+                    //! onBlur --> focustan çıktıktan sonra
+                    onBlur={handleBlur}
+                    //! helper text input altındaki validation uyarısı
+                    helperText={touched.username && errors.username}
+                    //! uyarıyı error şeklinde vermesi için (rengi kırmızı oldu)
+                    error={touched.username && Boolean(errors.username)}
+                    fullWidth
+                  />
+                </Grid>
                 <Grid item xs={12}>
                   <TextField name='email' label='Email' variant='outlined' value={values.email} onChange={handleChange} onBlur={handleBlur} helperText={touched.email && errors.email} error={touched.email && Boolean(errors.email)} fullWidth />
                 </Grid>

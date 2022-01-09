@@ -1,10 +1,10 @@
-import { signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { auth, provider } from '../../Helpers/firebase';
 import { SET_USER } from './blogActionTypes';
 
 export const setUserAction = payload => ({ type: SET_USER, user: payload });
 
-//! sign in
+//! sign in wit google
 export const signIn = navigate => {
   return async dispatch => {
     signInWithPopup(auth, provider)
@@ -39,5 +39,40 @@ export const signOutAPI = navigate => {
       .catch(err => {
         console.log(err.message);
       });
+  };
+};
+
+//! sign up with email
+export const signupWithEmail = (values, navigate) => {
+  return async dispatch => {
+    //! username --> null gelmemesi için
+    const displayName = values.username;
+    try {
+      //! createUserWithEmailAndPassword --> 3 parametre alıyor. "auth" kendi projemiz ile bağlıyoruz. "email" user email. "password" user password
+      let user = await createUserWithEmailAndPassword(auth, values.email, values.password);
+
+      //! updateProfile --> firebase'den geliyor. auth.currentUser --> register yapan kullanıcının username null gelmemesi için displayName'e oluşturduğumuz displayName'i atıyoruz.
+      await updateProfile(auth.currentUser, { displayName: displayName });
+      dispatch(setUserAction(auth.currentUser));
+      // console.log(auth.currentUser);
+      navigate('/');
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+};
+
+//! signin with email
+export const signinWithEmail = (values, navigate) => {
+  return async dispatch => {
+    try {
+      //! signInWithEmailAndPassword --> firebase'den gelen fonksiyon
+      let user = await signInWithEmailAndPassword(auth, values.email, values.password);
+      // console.log(user);
+      dispatch(setUserAction(user.user.auth.currentUser));
+      navigate('/');
+    } catch (err) {
+      alert(err.message);
+    }
   };
 };

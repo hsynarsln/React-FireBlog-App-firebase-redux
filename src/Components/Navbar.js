@@ -13,7 +13,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(state => state.userReducer.user);
-  console.log(user);
+  // console.log(user);
 
   const handleOpenUserMenu = event => {
     setAnchorElUser(event.currentTarget);
@@ -33,7 +33,7 @@ const Navbar = () => {
         <Toolbar disableGutters>
           <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
             <NavLink to='/' style={{ textDecoration: 'none' }}>
-              <img src='https://d1psgljc389n8q.cloudfront.net/bootcamps/logos/VX6tpIUJa' alt='Bank logo' class='nav__logo' width='30rem' />
+              <img src='https://d1psgljc389n8q.cloudfront.net/bootcamps/logos/VX6tpIUJa' alt='Bank logo' width='30rem' />
             </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
@@ -45,18 +45,25 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               {user?.displayName ? (
-                <Typography variant='body1' sx={{ my: 2, color: 'white', display: 'block' }}>
-                  {user.displayName}
+                <Typography variant='body1' sx={{ color: 'white', display: 'block' }}>
+                  {user.displayName.split(' ')[0].toUpperCase()}
                 </Typography>
               ) : (
                 ''
               )}
-              &nbsp; &nbsp;
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {user && user?.photoURL ? <Avatar alt={user.displayName} src={user.photoURL} /> : <Avatar alt='Remy Sharp' src={usersvg} />}
+                  {user ? (
+                    <Avatar alt={user.displayName} src={user.photoURL} /> || (
+                      <Avatar alt={user.displayName} src={user.photoURL}>
+                        {user.displayName.charAt(0)}
+                      </Avatar>
+                    )
+                  ) : (
+                    <Avatar alt='Remy Sharp' src={usersvg} />
+                  )}
                 </IconButton>
               </Tooltip>
             </div>

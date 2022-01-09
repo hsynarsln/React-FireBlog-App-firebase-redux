@@ -3,7 +3,7 @@ import { teal } from '@mui/material/colors';
 import React from 'react';
 import BlogForm from '../Components/BlogForm';
 
-const NewBlog = ({ currentId, setCurrentId }) => {
+const NewBlog = () => {
   return (
     <div style={{ marginTop: '2rem' }}>
       <Avatar style={{ margin: 'auto' }} sx={{ bgcolor: teal[400], width: 240, height: 240 }}>
@@ -19,7 +19,7 @@ const NewBlog = ({ currentId, setCurrentId }) => {
       </Typography>
       <Grid container justifyContent='center' alignItems='flex-start'>
         <Grid item xs={12} sm={8} md={4}>
-          <BlogForm currentId={currentId} setCurrentId={setCurrentId} />
+          <BlogForm />
         </Grid>
       </Grid>
     </div>

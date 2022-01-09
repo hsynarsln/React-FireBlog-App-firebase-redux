@@ -2,9 +2,11 @@ import { LockOutlined } from '@mui/icons-material';
 import { Avatar, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Icon from '../Components/Icon';
+import { signIn, signinWithEmail } from '../Redux/actions/userActions';
 
 //! Yup --> validation olarak kullanılıyor
 //! Bu şemayı Formik içerisine validationShema olarak atıyoruz.
@@ -23,28 +25,17 @@ const signUpValidationSchema = Yup.object().shape({
 function Login() {
   // const dispatch = useDispatch();
   const initialValues = {
-    name: '',
     email: '',
-    password: '',
-    password2: ''
+    password: ''
   };
 
   const [isSignup, setIsSignup] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
-    // console.log(values);
-    // alert(
-    //   `email: ${values.email}
-    //   password: ${values.password}`
-    // );
-    // console.log(isSignup);
-    // if (isSignup) {
-    //   dispatch(signup(values, navigate));
-    // } else {
-    //   dispatch(signin(values, navigate));
-    // }
+    dispatch(signinWithEmail(values, navigate));
 
     resetForm();
     // navigate('/');
@@ -62,7 +53,7 @@ function Login() {
           // mt: 6,
           height: 'calc(80vh - 3rem)',
           textAlign: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.6)',
+          backgroundColor: 'rgba(255, 255, 255, 0.4)',
           padding: '3rem',
           borderRadius: '20px'
         }}
@@ -113,7 +104,7 @@ function Login() {
                     LOGIN
                   </Button>
 
-                  <Button color='primary' fullWidth onClick={() => {}} startIcon={<Icon />} variant='contained'>
+                  <Button color='primary' fullWidth onClick={() => dispatch(signIn(navigate))} startIcon={<Icon />} variant='contained'>
                     Google Sign In
                   </Button>
                 </Grid>
