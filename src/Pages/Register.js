@@ -2,9 +2,11 @@ import { LockOutlined } from '@mui/icons-material';
 import { Avatar, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Icon from '../Components/Icon';
+import { signIn } from '../Redux/actions/userActions';
 
 //! Yup --> validation olarak kullanılıyor
 //! Bu şemayı Formik içerisine validationShema olarak atıyoruz.
@@ -21,7 +23,7 @@ const signUpValidationSchema = Yup.object().shape({
 });
 
 function Login() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const initialValues = {
     name: '',
     email: '',
@@ -113,7 +115,7 @@ function Login() {
                     REGISTER
                   </Button>
 
-                  <Button color='primary' fullWidth onClick={() => {}} startIcon={<Icon />} variant='contained'>
+                  <Button color='primary' fullWidth onClick={() => dispatch(signIn(navigate))} startIcon={<Icon />} variant='contained'>
                     Google Sign In
                   </Button>
                 </Grid>

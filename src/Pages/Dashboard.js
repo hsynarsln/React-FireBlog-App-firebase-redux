@@ -1,8 +1,16 @@
 import { Container, Grid, Grow, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Cards from '../Components/Cards';
+import { getAllBlogs } from '../Redux/actions/blogActions';
 
 const Dashboard = ({ setCurrentId }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllBlogs());
+  }, [dispatch]);
+
   return (
     <>
       <Typography variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>

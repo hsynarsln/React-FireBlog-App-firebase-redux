@@ -1,13 +1,19 @@
 import { AppBar, Avatar, Box, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
 import { teal } from '@mui/material/colors';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
+import usersvg from '../Assets/user.svg';
+import { signOutAPI } from '../Redux/actions/userActions';
 
 const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.userReducer.user);
+  console.log(user);
 
   const handleOpenUserMenu = event => {
     setAnchorElUser(event.currentTarget);
@@ -39,11 +45,21 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title='Open settings'>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
-              </IconButton>
-            </Tooltip>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              {user?.displayName ? (
+                <Typography variant='body1' sx={{ my: 2, color: 'white', display: 'block' }}>
+                  {user.displayName}
+                </Typography>
+              ) : (
+                ''
+              )}
+              &nbsp; &nbsp;
+              <Tooltip title='Open settings'>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  {user && user?.photoURL ? <Avatar alt={user.displayName} src={user.photoURL} /> : <Avatar alt='Remy Sharp' src={usersvg} />}
+                </IconButton>
+              </Tooltip>
+            </div>
             <Menu
               sx={{ mt: '45px' }}
               id='menu-appbar'
@@ -60,11 +76,11 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {auth ? (
+              {user?.displayName ? (
                 <>
                   <MenuItem onClick={() => navigate('/profile/userId?=1')}>Profile</MenuItem>
                   <MenuItem onClick={() => navigate('/new-blog')}>New</MenuItem>
-                  <MenuItem onClick={() => navigate('/')}>Logout</MenuItem>
+                  <MenuItem onClick={() => dispatch(signOutAPI(navigate))}>Logout</MenuItem>
                 </>
               ) : (
                 <>

@@ -60,7 +60,7 @@ const BlogForm = ({ currentId, setCurrentId, card }) => {
         <TextField name='imageURL' variant='outlined' label='Image URL *' fullWidth value={blogData.imageURL} onChange={e => setBlogData({ ...blogData, message: e.target.value })} />
         <TextField name='content' variant='outlined' label='Content *' fullWidth value={blogData.content} onChange={e => setBlogData({ ...blogData, tags: e.target.value })} multiline rows={10} />
         <Button className={classes.buttonSubmit} sx={{ bgcolor: teal[400] }} variant='contained' color='success' size='medium' type='submit' fullWidth>
-          UPDATE
+          {blogData.id ? 'UPDATE' : 'SUBMIT'}
         </Button>
       </form>
     </Paper>
