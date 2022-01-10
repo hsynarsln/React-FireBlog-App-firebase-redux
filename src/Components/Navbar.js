@@ -41,7 +41,7 @@ const Navbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
             <NavLink to='/' style={{ textDecoration: 'none' }}>
-              <Typography variant='h4' sx={{ my: 2, color: 'white', display: 'block' }}>
+              <Typography className='caption' variant='h4' sx={{ my: 2, color: 'white', display: 'block' }}>
                 FireBlog App
               </Typography>
             </NavLink>

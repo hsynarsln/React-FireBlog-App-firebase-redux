@@ -5,11 +5,11 @@ import Cards from '../Components/Cards';
 const Dashboard = ({ setCurrentId }) => {
   return (
     <>
-      <Typography variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
-        <span>--------- </span>
+      <Typography className='caption' variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
+        <span>------ </span>
         <span style={{ fontSize: '3rem' }}>D</span>
         ASHBOARD
-        <span> ---------</span>
+        <span> ------</span>
       </Typography>
       <Grow in>
         <Container>

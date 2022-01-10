@@ -23,7 +23,7 @@ export const signIn = navigate => {
 export const getUser = () => {
   return dispatch => {
     onAuthStateChanged(auth, user => {
-      console.log(user);
+      // console.log(user);
       if (user) {
         dispatch(setUserAction(user));
       } else {

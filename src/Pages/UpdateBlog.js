@@ -18,13 +18,13 @@ const UpdateBlog = ({ currentId, setCurrentId }) => {
       <Typography align='center'>
         <img src={card?.imageURL} alt='update blog' width='500rem' />
       </Typography>
-      <Typography variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
-        <span>--------- </span>
+      <Typography className='caption' variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
+        <span>------ </span>
         <span style={{ fontSize: '3rem' }}>U</span>
         PDATE
         <span style={{ fontSize: '3rem' }}> B</span>
         LOG
-        <span> ---------</span>
+        <span> ------</span>
       </Typography>
       <Grid container justifyContent='center' alignItems='flex-start'>
         <Grid item xs={12} sm={8} md={4}>

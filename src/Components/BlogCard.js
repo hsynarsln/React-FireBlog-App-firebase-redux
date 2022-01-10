@@ -48,18 +48,7 @@ const BlogCard = ({ card }) => {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
-        {/* <CardHeader
-          action={
-            (user?.result?.googleId === card?.creator || user?.result?._id === card?.creator) && (
-              <IconButton aria-label='settings' onClick={() => setCurrentId(card.id)}>
-                <MoreHorizIcon />
-              </IconButton>
-            )
-          }
-          title={card.email}
-          subheader={card.date}
-        /> */}
+      <Card sx={{ maxWidth: 425 }}>
         <div className='transform'>
           <CardMedia
             style={{ cursor: 'pointer' }}

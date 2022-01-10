@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=The+Nautigal:wght@700&display=swap');
+
 body {
   overflow-y: scroll;
   overflow-x: hidden;
@@ -31,4 +33,9 @@ html {
   background-size: cover;
   background-position: center;
   align-items: center;
+}
+
+.caption {
+  font-family: 'Great Vibes', cursive;
+  /* font-family: 'The Nautigal', cursive; */
 }

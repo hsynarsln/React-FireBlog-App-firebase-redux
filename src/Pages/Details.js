@@ -50,11 +50,11 @@ const Details = () => {
     <LinearProgress />
   ) : (
     <>
-      <Typography variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
-        <span>--------- </span>
+      <Typography className='caption' variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
+        <span>------ </span>
         <span style={{ fontSize: '3rem' }}>D</span>
         ETAILS
-        <span> ---------</span>
+        <span> ------</span>
       </Typography>
       <Grow in>
         <Container>
@@ -81,12 +81,12 @@ const Details = () => {
                     &nbsp; {card.email} &nbsp;
                   </Typography>
                 </CardContent>
-                <CardActions disableSpacing>
+                <CardActions disableSpacing style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                   <IconButton style={{ fontSize: '0.8em' }} size='small' color='error' disabled={!user} onClick={() => {}} aria-label='add to favorites'>
                     <Likes />
                   </IconButton>
                   {user?.uid === card?.uid && (
-                    <div style={{ position: 'absolute', right: '15%' }}>
+                    <div>
                       <IconButton style={{ fontSize: '0.8em' }} size='large' color='info' onClick={() => navigate(`/update-blog/${card.id}`)} aria-label='share'>
                         <EditIcon fontSize='large' />
                         &nbsp; EDIT &nbsp;

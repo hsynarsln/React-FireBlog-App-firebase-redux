@@ -20,8 +20,8 @@ const Cards = () => {
   ) : (
     <Grid container rowSpacing={3} columnSpacing={{ sm: 2, md: 3 }} alignItems='stretch' spacing={3}>
       {cards?.map(card => (
-        <Grid item xs={12} md={4} sm={6}>
-          <BlogCard key={card.id} card={card} />
+        <Grid item key={card.id} xs={12} md={4} sm={6} justifyContent='center'>
+          <BlogCard card={card} />
         </Grid>
       ))}
     </Grid>
