@@ -4,6 +4,7 @@ import { Avatar, Card, CardActions, CardContent, CardMedia, IconButton, Typograp
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { infoNote } from '../Helpers/toastNotify';
 import { likeBlog } from '../Redux/actions/blogActions';
 
 const BlogCard = ({ card }) => {
@@ -13,6 +14,15 @@ const BlogCard = ({ card }) => {
   const dispatch = useDispatch();
   // console.log(card);
   const navigate = useNavigate();
+
+  const showDetail = () => {
+    if (user) {
+      navigate(`/detail/${card.id}`);
+    } else {
+      navigate('login');
+      infoNote('Please Login for blog details!!');
+    }
+  };
 
   const Likes = () => {
     if (card.likes.length > 0) {
@@ -58,7 +68,8 @@ const BlogCard = ({ card }) => {
             image={card.imageURL}
             title={card.title}
             onClick={() => {
-              user ? navigate(`/detail/${card.id}`) : navigate('login');
+              // user ? navigate(`/detail/${card.id}`) : navigate('login');
+              showDetail();
             }}
           />
           <CardContent style={{ backgroundColor: '#e7e6f5', cursor: 'pointer', height: '6rem' }} onClick={() => navigate(`/detail/${card.id}`)}>

@@ -1,5 +1,6 @@
 import { addDoc, arrayUnion, collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import { db } from '../../Helpers/firebase';
+import { successNote } from '../../Helpers/toastNotify';
 import { CREATE_BLOG, FETCH_ALL_BLOGS } from './blogActionTypes';
 
 export const getAllBlogsAction = payload => ({ type: FETCH_ALL_BLOGS, payload: payload });
@@ -37,6 +38,7 @@ export const createBlog = payload => {
       uid: payload.uid
     });
     // console.log(blogData.id);
+    successNote('Blog Added Successfully!');
   };
 };
 
@@ -45,6 +47,7 @@ export const deleteBlog = (id, navigate) => {
     await deleteDoc(doc(db, 'blogs', id));
 
     navigate('/');
+    successNote('Deleted Successfully!');
   };
 };
 
@@ -58,6 +61,8 @@ export const updateBlog = payload => {
       content: payload.content,
       date: payload.timestamp
     });
+
+    successNote('Updated Successfully!');
   };
 };
 

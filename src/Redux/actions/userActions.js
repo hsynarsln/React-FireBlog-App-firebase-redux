@@ -1,5 +1,6 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { auth, provider } from '../../Helpers/firebase';
+import { successNote } from '../../Helpers/toastNotify';
 import { SET_USER } from './blogActionTypes';
 
 export const setUserAction = payload => ({ type: SET_USER, user: payload });
@@ -12,6 +13,7 @@ export const signIn = navigate => {
         // console.log(payload);
         dispatch(setUserAction(payload.user));
         navigate('/');
+        successNote('Logged in successfully!');
       })
       .catch(err => alert(err.message));
   };
@@ -20,9 +22,12 @@ export const signIn = navigate => {
 //! get user
 export const getUser = () => {
   return dispatch => {
-    auth.onAuthStateChanged(async user => {
+    onAuthStateChanged(auth, user => {
+      console.log(user);
       if (user) {
         dispatch(setUserAction(user));
+      } else {
+        console.log('user not found');
       }
     });
   };
@@ -35,6 +40,7 @@ export const signOutAPI = navigate => {
       .then(() => {
         dispatch(setUserAction(null));
         navigate('/');
+        successNote('Logged out!');
       })
       .catch(err => {
         console.log(err.message);
@@ -56,6 +62,7 @@ export const signupWithEmail = (values, navigate) => {
       dispatch(setUserAction(auth.currentUser));
       // console.log(auth.currentUser);
       navigate('/');
+      successNote('Logged in successfully!');
     } catch (err) {
       alert(err.message);
     }
@@ -71,6 +78,7 @@ export const signinWithEmail = (values, navigate) => {
       // console.log(user);
       dispatch(setUserAction(user.user.auth.currentUser));
       navigate('/');
+      successNote('Logged in successfully!');
     } catch (err) {
       alert(err.message);
     }

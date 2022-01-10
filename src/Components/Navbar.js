@@ -1,10 +1,10 @@
 import { AppBar, Avatar, Box, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import usersvg from '../Assets/user.svg';
-import { signOutAPI } from '../Redux/actions/userActions';
+import { getUser, signOutAPI } from '../Redux/actions/userActions';
 
 const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -13,7 +13,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(state => state.userReducer.user);
-  // console.log(user);
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
 
   const handleOpenUserMenu = event => {
     setAnchorElUser(event.currentTarget);
