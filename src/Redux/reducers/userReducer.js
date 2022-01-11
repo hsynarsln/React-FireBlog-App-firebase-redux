@@ -1,7 +1,8 @@
-import { SET_USER } from '../actions/blogActionTypes';
+import { SET_LOADING_STATUS, SET_USER } from '../actions/blogActionTypes';
 
 const INITIAL_STATE = {
-  user: null
+  user: null,
+  loading: false
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +11,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         user: action.user
+      };
+    case SET_LOADING_STATUS:
+      // console.log(state.loading);
+      return {
+        ...state,
+        loading: action.status
       };
     default:
       return state;

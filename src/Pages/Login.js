@@ -1,8 +1,9 @@
 import { LockOutlined } from '@mui/icons-material';
 import { Avatar, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import { Formik } from 'formik';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Icon from '../Components/Icon';
@@ -29,10 +30,10 @@ function Login() {
     password: ''
   };
 
-  const [isSignup, setIsSignup] = useState(false);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const loading = useSelector(state => state.userReducer.loading);
+  // console.log(loading);
 
   const handleSubmit = (values, { resetForm }) => {
     dispatch(signinWithEmail(values, navigate));
@@ -41,8 +42,8 @@ function Login() {
     // navigate('/');
   };
 
-  const switchMode = () => {
-    setIsSignup(prevIsSignup => !prevIsSignup);
+  const signInGoogle = () => {
+    dispatch(signIn(navigate));
   };
 
   return (
@@ -100,13 +101,19 @@ function Login() {
                   <TextField name='password' label='Password' type='password' value={values.password} onChange={handleChange} onBlur={handleBlur} helperText={touched.password && errors.password} error={touched.password && Boolean(errors.password)} fullWidth />
                 </Grid>
                 <Grid item xs={12}>
-                  <Button type='submit' variant='contained' color='primary' fullWidth style={{ marginBottom: '1rem' }}>
-                    LOGIN
-                  </Button>
+                  {loading ? (
+                    <CircularProgress color='secondary' />
+                  ) : (
+                    <>
+                      <Button type='submit' variant='contained' color='primary' fullWidth style={{ marginBottom: '1rem' }}>
+                        LOGIN
+                      </Button>
 
-                  <Button color='primary' fullWidth onClick={() => dispatch(signIn(navigate))} startIcon={<Icon />} variant='contained'>
-                    Google Sign In
-                  </Button>
+                      <Button color='primary' fullWidth onClick={() => signInGoogle()} startIcon={<Icon />} variant='contained'>
+                        Google Sign In
+                      </Button>
+                    </>
+                  )}
                 </Grid>
                 <Grid container justifyContent='flex-end'>
                   <p>

@@ -1,20 +1,15 @@
-import { CREATE_BLOG, FETCH_ALL_BLOGS } from '../actions/blogActionTypes';
+import { FETCH_ALL_BLOGS } from '../actions/blogActionTypes';
 
 const initialState = {
   blogData: []
 };
 
-export const blogReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
+export const blogReducer = (state = initialState, action) => {
+  switch (action.type) {
     case FETCH_ALL_BLOGS:
       return {
         ...state,
-        blogData: payload
-      };
-    case CREATE_BLOG:
-      return {
-        ...state,
-        blogData: payload
+        blogData: action.payload
       };
     default:
       return state;

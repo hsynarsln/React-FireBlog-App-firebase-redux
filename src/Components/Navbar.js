@@ -51,7 +51,7 @@ const Navbar = () => {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {user?.displayName ? (
                 <Typography variant='body1' sx={{ color: 'white', display: 'block' }}>
-                  {user.displayName.split(' ')[0].toUpperCase()}
+                  {user?.displayName.split(' ')[0].toUpperCase()}
                 </Typography>
               ) : (
                 ''
