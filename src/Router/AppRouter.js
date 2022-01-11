@@ -5,6 +5,7 @@ import Dashboard from '../Pages/Dashboard';
 import Details from '../Pages/Details';
 import Login from '../Pages/Login';
 import NewBlog from '../Pages/NewBlog';
+import NotFound from '../Pages/NotFound';
 import Profile from '../Pages/Profile';
 import Register from '../Pages/Register';
 import UpdateBlog from '../Pages/UpdateBlog';
@@ -21,6 +22,7 @@ const AppRouter = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/profile/:id' element={<Profile />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </Router>
   );
