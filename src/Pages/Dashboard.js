@@ -2,10 +2,10 @@ import { Container, Grid, Grow, Typography } from '@mui/material';
 import React from 'react';
 import Cards from '../Components/Cards';
 
-const Dashboard = ({ setCurrentId }) => {
+const Dashboard = () => {
   return (
     <>
-      <Typography className='background double' style={{ fontFamily: 'Qwitcher Grypen' }} variant='h3' align='center' sx={{ my: 2, color: '#046582' }}>
+      <Typography className='background double' style={{ fontFamily: 'Qwitcher Grypen', marginTop: '5rem' }} variant='h3' align='center' sx={{ my: 2, color: '#046582' }}>
         <span className='span'>DASHBOARD</span>
       </Typography>
       <Grow in>

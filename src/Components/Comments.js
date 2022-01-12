@@ -4,6 +4,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
+import moment from 'moment';
 import React from 'react';
 
 const Comments = ({ comment }) => {
@@ -20,7 +21,7 @@ const Comments = ({ comment }) => {
           secondary={
             <React.Fragment>
               <Typography sx={{ display: 'inline' }} component='span' variant='body2' color='text.primary'>
-                {comment.createdAt.toDate().toString().slice(0, 25)}
+                {moment(comment.createdAt.toDate()).fromNow()}
               </Typography>
               {`  -  ${comment.text}`}
             </React.Fragment>

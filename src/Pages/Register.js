@@ -51,10 +51,11 @@ function Login() {
     <div className='auth'>
       <Container
         sx={{
+          marginTop: '3rem',
           // mt: 6,
           height: 'calc(80vh)',
           textAlign: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.4)',
+          backgroundColor: 'rgba(255, 255, 255, 0.5)',
           padding: '3rem',
           borderRadius: '20px'
         }}
@@ -62,7 +63,7 @@ function Login() {
       >
         <Avatar
           sx={{
-            margin: '1rem auto',
+            margin: 'auto',
             bgcolor: 'primary.main'
             // bgcolor: blue[500],
           }}

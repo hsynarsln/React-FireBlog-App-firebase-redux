@@ -50,11 +50,11 @@ function Login() {
     <div className='auth'>
       <Container
         sx={{
-          marginTop: '3rem',
+          marginTop: '5rem',
           // mt: 6,
           height: 'calc(80vh - 3rem)',
           textAlign: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.4)',
+          backgroundColor: 'rgba(255, 255, 255, 0.5)',
           padding: '3rem',
           borderRadius: '20px'
         }}

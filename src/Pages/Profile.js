@@ -8,11 +8,11 @@ const Profile = () => {
   // console.log(user);
 
   return (
-    <Grid container alignItems='center' justifyContent='center' mt={3}>
-      <Grid item xs={12} md={8} sm={10} alignItems='center' justifyContent='center'>
+    <Grid container alignItems='center' justifyContent='center' mt={10}>
+      <Grid item xs={10} md={8} sm={10} alignItems='center' justifyContent='center'>
         <Card sx={{ maxWidth: 1180 }}>
           <CardMedia component='img' height='300' image={image} alt='green iguana' />
-          <Stack justifyContent='center' alignItems='center' mt={3} style={{ position: 'absolute', top: '290px', left: '45%' }}>
+          <Stack justifyContent='center' alignItems='center' mt={3} style={{ position: 'absolute', top: '280px', left: '45%' }}>
             {user?.photoURL ? <Avatar alt={user.displayName} src={user.photoURL} sx={{ width: 150, height: 150 }} /> : <Avatar alt={user.displayName.toUpperCase()} src='/static/images/avatar/2.jpg' sx={{ width: 150, height: 150 }} />}
           </Stack>
           <CardContent>

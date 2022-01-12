@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Avatar, Grid, Stack, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -17,10 +17,10 @@ const UpdateBlog = () => {
   }, [dispatch]);
 
   return (
-    <div style={{ marginTop: '2rem' }}>
-      <Typography align='center'>
-        <img src={card?.imageURL} alt='update blog' width='500rem' />
-      </Typography>
+    <div style={{ marginTop: '5rem' }}>
+      <Stack justifyContent='center' alignItems='center'>
+        <Avatar variant='square' alt={card?.title} src={card?.imageURL} sx={{ width: { xs: 450, sm: 500, md: 500 }, height: 300 }} />
+      </Stack>
       <Typography className='background double' style={{ fontFamily: 'Qwitcher Grypen' }} variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
         <span className='span'>
           <span style={{ fontSize: '3rem' }}>U</span>

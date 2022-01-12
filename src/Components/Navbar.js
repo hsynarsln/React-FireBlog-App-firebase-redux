@@ -3,6 +3,7 @@ import { blue, grey } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
+import logo from '../Assets/logo.jpg';
 import usersvg from '../Assets/user.svg';
 import { getUser, signOutAPI } from '../Redux/actions/userActions';
 
@@ -31,17 +32,17 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position='static' sx={{ bgcolor: grey[800] }}>
+    <AppBar position='fixed' sx={{ bgcolor: grey[800] }}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
             <NavLink to='/' style={{ textDecoration: 'none' }}>
-              <img src='https://d1psgljc389n8q.cloudfront.net/bootcamps/logos/VX6tpIUJa' alt='Bank logo' width='30rem' />
+              <Avatar alt='Bank Logo' src={logo} sx={{ width: { xs: 50, sm: 50, md: 50 }, height: 50 }} />
             </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
             <NavLink to='/' style={{ textDecoration: 'none' }}>
-              <Typography style={{ fontFamily: 'Permanent Marker' }} variant='h3' sx={{ my: 1, color: 'white', display: 'block' }}>
+              <Typography style={{ fontFamily: 'Permanent Marker' }} variant='h3' sx={{ my: 1, color: 'white', display: { xs: 'none', md: 'flex' } }}>
                 FireBlog App
               </Typography>
             </NavLink>

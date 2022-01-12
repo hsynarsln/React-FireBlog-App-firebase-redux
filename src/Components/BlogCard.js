@@ -1,5 +1,6 @@
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import { Avatar, Button, ButtonGroup, Card, CardActions, CardContent, CardMedia, IconButton, Input, Modal, Typography } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+import { Avatar, Button, ButtonGroup, Card, CardActions, CardContent, CardMedia, IconButton, Modal, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { Timestamp } from 'firebase/firestore';
 import React, { useState } from 'react';
@@ -17,10 +18,15 @@ const style = {
   width: 600,
   bgcolor: '#f5f5f5',
   border: '2px solid #000',
+  borderRadius: '20px',
   boxShadow: 24,
   pt: 2,
   px: 4,
-  pb: 3
+  pb: 3,
+  fontFamily: 'Permanent Marker',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center'
 };
 
 const BlogCard = ({ card }) => {
@@ -59,7 +65,7 @@ const BlogCard = ({ card }) => {
     <>
       <Card sx={{ maxWidth: 425 }}>
         <div className='transform'>
-          <CardMedia style={{ cursor: 'pointer' }} height='194' component='img' image={card.imageURL} title={card.title} onClick={showDetail} />
+          <CardMedia style={{ cursor: 'pointer' }} height='175' component='img' image={card.imageURL} title={card.title} onClick={showDetail} />
           <CardContent style={{ backgroundColor: '#e7e6f5', cursor: 'pointer', height: '6rem' }} onClick={showDetail}>
             <Typography variant='h5' color='text.primary' mb={2} style={{ color: '#046582', fontFamily: 'Permanent Marker' }}>
               {card.title.toUpperCase()}
@@ -92,8 +98,10 @@ const BlogCard = ({ card }) => {
       </Card>
       <Modal open={open} onClose={e => setOpen(false)}>
         <Box sx={{ ...style, width: 400 }}>
-          <h2>Comment</h2>
-          <Input placeholder='Please type your comments...' value={input} onChange={event => setInput(event.target.value)} />
+          <Typography className='background double' style={{ fontFamily: 'Permanent Marker' }} variant='h6' align='center' sx={{ my: 2, color: '#046582' }}>
+            <span className='span'>COMMENT</span>
+          </Typography>
+          <TextField label='Comment' color='secondary' placeholder='Please type your comments...' value={input} onChange={event => setInput(event.target.value)} />
           <Box
             sx={{
               display: 'flex',
@@ -105,10 +113,10 @@ const BlogCard = ({ card }) => {
             }}
           >
             <ButtonGroup variant='text' aria-label='text button group'>
-              <Button color='error' onClick={e => setOpen(false)}>
+              <Button color='error' variant='contained' onClick={e => setOpen(false)}>
                 CANCEL
               </Button>
-              <Button color='primary' disabled={!input} onClick={addComment}>
+              <Button variant='contained' color='primary' disabled={!input} onClick={addComment} startIcon={<SendIcon />}>
                 OKAY
               </Button>
             </ButtonGroup>
