@@ -1,3 +1,4 @@
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Avatar, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
@@ -62,13 +63,13 @@ const BlogCard = ({ card }) => {
             }}
           />
           <CardContent style={{ backgroundColor: '#e7e6f5', cursor: 'pointer', height: '6rem' }} onClick={() => navigate(`/detail/${card.id}`)}>
-            <Typography variant='h5' color='text.primary' mb={2} style={{ color: '#046582' }}>
+            <Typography variant='h5' color='text.primary' mb={2} style={{ color: '#046582', fontFamily: 'Permanent Marker' }}>
               {card.title.toUpperCase()}
             </Typography>
-            <Typography variant='body1' color='text.secondary'>
+            <Typography variant='body1' color='text.secondary' style={{ fontFamily: 'Architects Daughter', fontWeight: '900' }}>
               {card.date.toDate().toLocaleDateString()}
             </Typography>
-            <Typography variant='body2' color='text.primary' className='line-clamp'>
+            <Typography variant='body2' color='text.primary' className='line-clamp' style={{ fontFamily: 'Architects Daughter' }}>
               {card.content}
             </Typography>
           </CardContent>
@@ -85,12 +86,10 @@ const BlogCard = ({ card }) => {
           <IconButton style={{ fontSize: '0.8em', cursor: 'pointer' }} size='small' color='error' disabled={!user} onClick={() => dispatch(likeBlog(card.id, user.uid))} aria-label='add to favorites'>
             <Likes />
           </IconButton>
-          {/* {(user?.result?.googleId === card?.creator || user?.result?._id === card?.creator) && (
-            <IconButton style={{ fontSize: '0.8em' }} size='small' color='info' onClick={() => {}} aria-label='share'>
-              <DeleteIcon fontSize='small' />
-              &nbsp; DELETE &nbsp;
-            </IconButton>
-          )} */}
+          <IconButton style={{ fontSize: '0.8em', cursor: 'pointer' }} size='small' disabled={!user} onClick={() => {}} aria-label='comment'>
+            <ChatBubbleOutlineIcon />
+            &nbsp;0
+          </IconButton>
         </CardActions>
       </Card>
     </>

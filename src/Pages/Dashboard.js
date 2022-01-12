@@ -5,10 +5,9 @@ import Cards from '../Components/Cards';
 const Dashboard = ({ setCurrentId }) => {
   return (
     <>
-      <Typography className='caption' variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
+      <Typography style={{ fontFamily: 'Qwitcher Grypen' }} variant='h3' align='center' sx={{ my: 2, color: '#046582' }}>
         <span>------ </span>
-        <span style={{ fontSize: '3rem' }}>D</span>
-        ASHBOARD
+        DASHBOARD
         <span> ------</span>
       </Typography>
       <Grow in>

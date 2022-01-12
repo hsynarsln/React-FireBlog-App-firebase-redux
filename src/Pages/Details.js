@@ -1,3 +1,4 @@
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -25,15 +26,15 @@ const Details = () => {
 
   const Likes = () => {
     if (card.likes.length > 0) {
-      return card.likes.find(like => like === (user?.result?.googleId || user?.result?._id)) ? (
+      return card.likes.find(like => like === user?.uid) ? (
         <>
           <FavoriteIcon fontSize='large' />
-          &nbsp;{card.likes.length > 2 ? `You and ${card.likes.length - 1} others` : `${card.likes.length} like${card.likes.length > 1 ? 's' : ''}`}
+          &nbsp;{card.likes.length}
         </>
       ) : (
         <>
           <FavoriteBorderIcon fontSize='large' />
-          &nbsp;{card.likes.length} {card.likes.length === 1 ? 'Like' : 'Likes'}
+          &nbsp;{card.likes.length}
         </>
       );
     }
@@ -41,7 +42,6 @@ const Details = () => {
     return (
       <>
         <FavoriteBorderIcon fontSize='large' />
-        &nbsp;Like
       </>
     );
   };
@@ -50,10 +50,9 @@ const Details = () => {
     <LinearProgress />
   ) : (
     <>
-      <Typography className='caption' variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
+      <Typography style={{ fontFamily: 'Qwitcher Grypen' }} variant='h3' align='center' sx={{ my: 2, color: '#046582' }}>
         <span>------ </span>
-        <span style={{ fontSize: '3rem' }}>D</span>
-        ETAILS
+        DETAILS
         <span> ------</span>
       </Typography>
       <Grow in>
@@ -63,13 +62,13 @@ const Details = () => {
               <Card sx={{ maxWidth: 1200 }}>
                 <CardMedia component='img' image={card.imageURL} title={card.title} />
                 <CardContent style={{ backgroundColor: '#e7e6f5' }}>
-                  <Typography variant='h4' mb={2} mt={2} align='center' style={{ color: '#046582' }}>
+                  <Typography variant='h4' color='text.primary' mb={2} mt={2} align='center' style={{ color: '#046582', fontFamily: 'Permanent Marker' }}>
                     {card.title.toUpperCase()}
                   </Typography>
-                  <Typography variant='h6' color='text.secondary' align='center'>
+                  <Typography variant='h6' color='text.secondary' align='center' style={{ fontFamily: 'Architects Daughter', fontWeight: '900' }}>
                     {card.date.toDate().toLocaleDateString()}
                   </Typography>
-                  <Typography variant='body1' color='text.primary'>
+                  <Typography variant='body1' color='text.primary' style={{ fontFamily: 'Architects Daughter' }}>
                     {card.content}
                   </Typography>
                 </CardContent>
@@ -82,9 +81,15 @@ const Details = () => {
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <IconButton style={{ fontSize: '0.8em' }} size='small' color='error' disabled={!user} onClick={() => {}} aria-label='add to favorites'>
-                    <Likes />
-                  </IconButton>
+                  <div>
+                    <IconButton size='small' color='error' disabled={!user} onClick={() => {}} aria-label='add to favorites'>
+                      <Likes />
+                    </IconButton>
+                    <IconButton size='small' disabled={!user} onClick={() => {}} aria-label='comment'>
+                      <ChatBubbleOutlineIcon fontSize='large' />
+                      &nbsp;0
+                    </IconButton>
+                  </div>
                   {user?.uid === card?.uid && (
                     <div>
                       <IconButton style={{ fontSize: '0.8em' }} size='large' color='info' onClick={() => navigate(`/update-blog/${card.id}`)} aria-label='share'>

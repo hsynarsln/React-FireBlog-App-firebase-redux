@@ -1,5 +1,5 @@
 import { Button, Paper, TextField } from '@mui/material';
-import { teal } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 import { makeStyles } from '@mui/styles';
 import { Timestamp } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
@@ -26,7 +26,11 @@ const useStyles = makeStyles(theme => ({
     margin: '10px 0'
   },
   buttonSubmit: {
-    marginBottom: 10
+    marginBottom: 10,
+    '&:hover': {
+      background: '#aec8bf',
+      color: '#126d88'
+    }
   }
 }));
 
@@ -66,7 +70,7 @@ const BlogForm = ({ currentId, setCurrentId, card }) => {
         <TextField name='title' variant='outlined' label='Title *' fullWidth value={blogData.title} onChange={e => setBlogData({ ...blogData, title: e.target.value })} />
         <TextField name='imageURL' variant='outlined' label='Image URL *' fullWidth value={blogData.imageURL} onChange={e => setBlogData({ ...blogData, imageURL: e.target.value })} />
         <TextField name='content' variant='outlined' label='Content *' fullWidth value={blogData.content} onChange={e => setBlogData({ ...blogData, content: e.target.value })} multiline rows={10} />
-        <Button className={classes.buttonSubmit} sx={{ bgcolor: teal[400] }} variant='contained' color='success' size='medium' type='submit' fullWidth>
+        <Button className={classes.buttonSubmit} sx={{ bgcolor: grey[800] }} variant='contained' size='medium' type='submit' fullWidth>
           {blogData.id ? 'UPDATE' : 'SUBMIT'}
         </Button>
       </form>

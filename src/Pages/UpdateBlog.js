@@ -18,7 +18,7 @@ const UpdateBlog = ({ currentId, setCurrentId }) => {
       <Typography align='center'>
         <img src={card?.imageURL} alt='update blog' width='500rem' />
       </Typography>
-      <Typography className='caption' variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
+      <Typography style={{ fontFamily: 'Qwitcher Grypen' }} variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
         <span>------ </span>
         <span style={{ fontSize: '3rem' }}>U</span>
         PDATE

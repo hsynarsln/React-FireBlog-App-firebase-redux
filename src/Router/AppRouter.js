@@ -24,7 +24,7 @@ const AppRouter = () => {
         <Route path='/update-blog/:id' element={<UpdateBlog />} />
         {!user && <Route path='/login' element={<Login />} />}
         {!user && <Route path='/register' element={<Register />} />}
-        <Route path='/profile/:id' element={<Profile />} />
+        {user && <Route path='/profile/:id' element={<Profile />} />}
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Router>

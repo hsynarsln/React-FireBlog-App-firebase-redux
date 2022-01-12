@@ -1,5 +1,5 @@
 import { AppBar, Avatar, Box, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
-import { grey } from '@mui/material/colors';
+import { blue, grey } from '@mui/material/colors';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -41,7 +41,7 @@ const Navbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
             <NavLink to='/' style={{ textDecoration: 'none' }}>
-              <Typography className='caption' variant='h4' sx={{ my: 2, color: 'white', display: 'block' }}>
+              <Typography style={{ fontFamily: 'Permanent Marker' }} variant='h3' sx={{ my: 1, color: 'white', display: 'block' }}>
                 FireBlog App
               </Typography>
             </NavLink>
@@ -50,7 +50,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {user?.displayName ? (
-                <Typography variant='body1' sx={{ color: 'white', display: 'block' }}>
+                <Typography variant='body1' sx={{ color: 'white', display: 'block' }} style={{ fontFamily: 'Architects Daughter' }}>
                   {user?.displayName.split(' ')[0].toUpperCase()}
                 </Typography>
               ) : (
@@ -58,7 +58,7 @@ const Navbar = () => {
               )}
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {user ? <Avatar alt={user.displayName} src={user.photoURL} /> && <Avatar alt={user.displayName.toUpperCase()} src='/static/images/avatar/2.jpg' /> : <Avatar alt='Remy Sharp' src={usersvg} />}
+                  {user ? <Avatar alt={user.displayName.toUpperCase()} src={user.photoURL || '/static/images/avatar/2.jpg'} sx={{ bgcolor: blue[500] }} /> : <Avatar alt='Remy Sharp' src={usersvg} />}
                 </IconButton>
               </Tooltip>
             </div>
@@ -80,7 +80,7 @@ const Navbar = () => {
             >
               {user?.displayName ? (
                 <div>
-                  <MenuItem onClick={() => navigate('/profile/userId?=1')}>Profile</MenuItem>
+                  <MenuItem onClick={() => navigate(`/profile/${user.uid}`)}>Profile</MenuItem>
                   <MenuItem onClick={() => navigate('/new-blog')}>New</MenuItem>
                   <MenuItem onClick={() => dispatch(signOutAPI(navigate))}>Logout</MenuItem>
                 </div>
