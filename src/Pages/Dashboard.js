@@ -5,10 +5,8 @@ import Cards from '../Components/Cards';
 const Dashboard = ({ setCurrentId }) => {
   return (
     <>
-      <Typography style={{ fontFamily: 'Qwitcher Grypen' }} variant='h3' align='center' sx={{ my: 2, color: '#046582' }}>
-        <span>------ </span>
-        DASHBOARD
-        <span> ------</span>
+      <Typography className='background double' style={{ fontFamily: 'Qwitcher Grypen' }} variant='h3' align='center' sx={{ my: 2, color: '#046582' }}>
+        <span className='span'>DASHBOARD</span>
       </Typography>
       <Grow in>
         <Container>

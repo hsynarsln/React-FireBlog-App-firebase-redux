@@ -33,6 +33,18 @@ const Profile = () => {
             <Typography variant='body2' color='text.secondary'>
               {user?.email || null}
             </Typography>
+            <Typography gutterBottom variant='h5' component='div' mt={2}>
+              Joined At
+            </Typography>
+            <Typography variant='body2' color='text.secondary'>
+              {user?.metadata.creationTime || null}
+            </Typography>
+            <Typography gutterBottom variant='h5' component='div' mt={2}>
+              Last Sign In Time
+            </Typography>
+            <Typography variant='body2' color='text.secondary'>
+              {user?.metadata.lastSignInTime || null}
+            </Typography>
           </CardContent>
         </Card>
       </Grid>

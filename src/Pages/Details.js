@@ -50,10 +50,8 @@ const Details = () => {
     <LinearProgress />
   ) : (
     <>
-      <Typography style={{ fontFamily: 'Qwitcher Grypen' }} variant='h3' align='center' sx={{ my: 2, color: '#046582' }}>
-        <span>------ </span>
-        DETAILS
-        <span> ------</span>
+      <Typography className='background double' style={{ fontFamily: 'Qwitcher Grypen' }} variant='h3' align='center' sx={{ my: 2, color: '#046582' }}>
+        <span className='span'>DETAILS</span>
       </Typography>
       <Grow in>
         <Container>
