@@ -1,11 +1,11 @@
-import { addDoc, arrayUnion, collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, deleteDoc, doc, getDoc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import { db } from '../../Helpers/firebase';
 import { successNote } from '../../Helpers/toastNotify';
-import { CREATE_BLOG, FETCH_ALL_BLOGS } from './blogActionTypes';
+import { FETCH_ALL_BLOGS, FETCH_BLOG } from './blogActionTypes';
 
 export const getAllBlogsAction = payload => ({ type: FETCH_ALL_BLOGS, payload: payload });
 
-export const createBlogAction = payload => ({ type: CREATE_BLOG, payload: payload });
+export const getBlogAction = payload => ({ type: FETCH_BLOG, payload: payload });
 
 export const getAllBlogs = () => {
   return async dispatch => {
@@ -22,6 +22,20 @@ export const getAllBlogs = () => {
 
       dispatch(getAllBlogsAction(payload));
     });
+  };
+};
+
+export const getBlogWithId = id => {
+  return async dispatch => {
+    const docRef = doc(db, 'blogs', id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      dispatch(getBlogAction({ ...docSnap.data(), id: docSnap.id }));
+    } else {
+      // doc.data() will be undefined in this case
+      console.log('No such document!');
+    }
   };
 };
 
@@ -75,5 +89,21 @@ export const likeBlog = (id, uid) => {
     });
 
     // console.log(updateData);
+  };
+};
+
+export const addCommentBlog = values => {
+  return async dispatch => {
+    const updateData = doc(db, 'blogs', values.id);
+
+    await updateDoc(updateData, {
+      comments: arrayUnion({
+        createdAt: values.timestamp,
+        creator: values.creator,
+        text: values.text
+      })
+    });
+
+    successNote('Your comment added successfully!');
   };
 };

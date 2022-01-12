@@ -19,8 +19,14 @@ html {
   overflow: hidden;
 }
 
+.transform {
+  transition-duration: 167ms;
+}
 .transform:hover {
   filter: brightness(90%);
+}
+.transform:after {
+  transition: transform 1s ease-in-out;
 }
 
 .auth {

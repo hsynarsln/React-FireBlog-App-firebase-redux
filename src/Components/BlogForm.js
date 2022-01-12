@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const BlogForm = ({ currentId, setCurrentId, card }) => {
+const BlogForm = ({ card }) => {
   const [blogData, setBlogData] = useState({
     id: '',
     title: '',

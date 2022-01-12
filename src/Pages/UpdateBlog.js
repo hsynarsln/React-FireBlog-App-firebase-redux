@@ -1,17 +1,20 @@
 import { Grid, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import BlogForm from '../Components/BlogForm';
+import { getBlogWithId } from '../Redux/actions/blogActions';
 
-const UpdateBlog = ({ currentId, setCurrentId }) => {
-  const [card, setCard] = useState();
+const UpdateBlog = () => {
   const { id } = useParams();
-  const cards = useSelector(state => state.blogReducer.blogData);
+  const card = useSelector(state => state.blogReducer.blog);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setCard(cards.find(c => c.id == id));
-  }, [card]);
+    if (!card) {
+      dispatch(getBlogWithId(id));
+    }
+  }, [dispatch]);
 
   return (
     <div style={{ marginTop: '2rem' }}>
@@ -28,7 +31,7 @@ const UpdateBlog = ({ currentId, setCurrentId }) => {
       </Typography>
       <Grid container justifyContent='center' alignItems='flex-start'>
         <Grid item xs={12} sm={8} md={4}>
-          <BlogForm currentId={currentId} setCurrentId={setCurrentId} card={card} />
+          <BlogForm card={card} />
         </Grid>
       </Grid>
     </div>

@@ -1,7 +1,8 @@
-import { FETCH_ALL_BLOGS } from '../actions/blogActionTypes';
+import { FETCH_ALL_BLOGS, FETCH_BLOG } from '../actions/blogActionTypes';
 
 const initialState = {
-  blogData: []
+  blogData: [],
+  blog: null
 };
 
 export const blogReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ export const blogReducer = (state = initialState, action) => {
       return {
         ...state,
         blogData: action.payload
+      };
+    case FETCH_BLOG:
+      return {
+        ...state,
+        blog: action.payload
       };
     default:
       return state;

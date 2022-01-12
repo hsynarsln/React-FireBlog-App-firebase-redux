@@ -58,7 +58,7 @@ const Navbar = () => {
               )}
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {user ? <Avatar alt={user.displayName.toUpperCase()} src={user.photoURL || '/static/images/avatar/2.jpg'} sx={{ bgcolor: blue[500] }} /> : <Avatar alt='Remy Sharp' src={usersvg} />}
+                  {user ? <Avatar alt={user.displayName?.toUpperCase()} src={user.photoURL || '/static/images/avatar/2.jpg'} sx={{ bgcolor: blue[500] }} /> : <Avatar alt='Remy Sharp' src={usersvg} />}
                 </IconButton>
               </Tooltip>
             </div>
