@@ -21,6 +21,7 @@ export const getAllBlogs = () => {
       // console.log(payload);
 
       dispatch(getAllBlogsAction(payload));
+      dispatch(getBlogAction(null));
     });
   };
 };
@@ -32,6 +33,7 @@ export const getBlogWithId = id => {
 
     if (docSnap.exists()) {
       dispatch(getBlogAction({ ...docSnap.data(), id: docSnap.id }));
+      dispatch(getAllBlogsAction(null));
     } else {
       // doc.data() will be undefined in this case
       console.log('No such document!');

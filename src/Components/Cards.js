@@ -16,7 +16,7 @@ const Cards = () => {
   // console.log(cards);
 
   return !cards ? (
-    <LinearProgress />
+    <LinearProgress color='inherit' />
   ) : (
     <Grid container rowSpacing={3} columnSpacing={{ sm: 2, md: 3 }} alignItems='stretch' spacing={3}>
       {cards?.map(card => (
