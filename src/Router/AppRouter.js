@@ -19,9 +19,9 @@ const AppRouter = () => {
       <Navbar />
       <Routes>
         <Route path='/' element={<Dashboard />} />
-        <Route path='/detail/:id' element={<Details />} />
-        <Route path='/new-blog' element={<NewBlog />} />
-        <Route path='/update-blog/:id' element={<UpdateBlog />} />
+        {user && <Route path='/detail/:id' element={<Details />} />}
+        {user && <Route path='/new-blog' element={<NewBlog />} />}
+        {user && <Route path='/update-blog/:id' element={<UpdateBlog />} />}
         {!user && <Route path='/login' element={<Login />} />}
         {!user && <Route path='/register' element={<Register />} />}
         {user && <Route path='/profile/:id' element={<Profile />} />}
