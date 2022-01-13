@@ -1,13 +1,11 @@
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import SendIcon from '@mui/icons-material/Send';
-import { Avatar, Button, ButtonGroup, Card, CardActions, CardContent, CardMedia, IconButton, Modal, TextField, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import { Timestamp } from 'firebase/firestore';
+import { Avatar, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { infoNote } from '../Helpers/toastNotify';
-import { addCommentBlog, getBlogWithId, likeBlog } from '../Redux/actions/blogActions';
+import { getBlogWithId, likeBlog } from '../Redux/actions/blogActions';
+import CommentModal from './CommentModal';
 import Likes from './Likes';
 
 const style = {
@@ -40,16 +38,6 @@ const BlogCard = ({ card }) => {
   const [open, setOpen] = useState(false);
 
   const [input, setInput] = useState('');
-
-  //! ADD COMMENT
-  const addComment = async e => {
-    e.preventDefault();
-
-    await dispatch(addCommentBlog({ id: card.id, timestamp: Timestamp.now(), creator: user.email, text: input }));
-
-    setInput('');
-    setOpen(false);
-  };
 
   const showDetail = () => {
     if (user) {
@@ -96,33 +84,7 @@ const BlogCard = ({ card }) => {
           </IconButton>
         </CardActions>
       </Card>
-      <Modal open={open} onClose={e => setOpen(false)}>
-        <Box sx={{ ...style, width: 400 }}>
-          <Typography className='background double' style={{ fontFamily: 'Permanent Marker' }} variant='h6' align='center' sx={{ my: 2, color: '#046582' }}>
-            <span className='span'>COMMENT</span>
-          </Typography>
-          <TextField label='Comment' color='secondary' placeholder='Please type your comments...' value={input} onChange={event => setInput(event.target.value)} />
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              '& > *': {
-                m: 1
-              }
-            }}
-          >
-            <ButtonGroup variant='text' aria-label='text button group'>
-              <Button color='error' variant='contained' onClick={e => setOpen(false)}>
-                CANCEL
-              </Button>
-              <Button variant='contained' color='primary' disabled={!input} onClick={addComment} startIcon={<SendIcon />}>
-                OKAY
-              </Button>
-            </ButtonGroup>
-          </Box>
-        </Box>
-      </Modal>
+      <CommentModal input={input} setInput={setInput} open={open} setOpen={setOpen} user={user} card={card} />
     </>
   );
 };
