@@ -1,13 +1,14 @@
 import { Avatar, Grid, Typography } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import React from 'react';
+import blogImg from '../Assets/blogImg.jpg';
 import BlogForm from '../Components/BlogForm';
 
 const NewBlog = () => {
   return (
     <div style={{ marginTop: '5rem' }}>
       <Avatar style={{ margin: 'auto' }} sx={{ bgcolor: grey[800], width: 240, height: 240 }}>
-        <img src='https://eds-fireblog.herokuapp.com/static/media/blok.7e6674a5.png' alt='new blog' />
+        <img style={{ borderRadius: '50%' }} src={blogImg} alt='new blog' />
       </Avatar>
       <Typography className='background double' style={{ fontFamily: 'Qwitcher Grypen' }} variant='h4' align='center' sx={{ my: 2, color: '#046582' }}>
         <span className='span'>
